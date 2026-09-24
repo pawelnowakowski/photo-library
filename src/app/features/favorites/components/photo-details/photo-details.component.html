@@ -1,0 +1,18 @@
+<section class="photo-details">
+  @if (photo(); as favoritePhoto) {
+    <div class="photo-details__image-frame">
+      <img class="photo-details__image" [ngSrc]="favoritePhoto.url" alt="Favorite photo" fill priority />
+    </div>
+
+    <button mat-flat-button type="button" class="photo-details__remove" (click)="removeFromFavorites(favoritePhoto)">
+      <mat-icon>delete</mat-icon>
+      Remove from favorites
+    </button>
+  } @else {
+    <div class="photo-details__not-found" role="status">
+      <span class="photo-details__heading">Photo not found</span>
+      <p class="photo-details__message">This photo is not in your favorites.</p>
+      <a mat-button routerLink="/favorites">Back to favorites</a>
+    </div>
+  }
+</section>

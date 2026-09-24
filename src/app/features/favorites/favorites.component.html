@@ -1,0 +1,15 @@
+<section class="favorites">
+  @if (store.favorites().length > 0) {
+    <ul class="favorites__list" aria-label="Favorite photos">
+      @for (photo of store.favorites(); track photo.id) {
+        <li class="favorites__item">
+          <a [routerLink]="['/photos', photo.id]" aria-label="Open favorite photo details">
+            <app-photo-tile [photo]="photo" [priority]="$first" />
+          </a>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="favorites__empty-state">No favorite photos yet.</p>
+  }
+</section>

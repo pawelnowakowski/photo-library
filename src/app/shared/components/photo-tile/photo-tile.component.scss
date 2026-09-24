@@ -1,0 +1,8 @@
+.photo-tile {
+  display: block;
+  background: var(--mat-sys-surface-container);
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}

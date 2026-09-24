@@ -1,0 +1,108 @@
+@use '../../../styles/photo-grid' as photo-grid;
+
+.photo-list {
+  width: min(100% - 2rem, 90rem);
+  padding-block: 1.5rem 2rem;
+  margin-inline: auto;
+
+  &__grid {
+    @include photo-grid.photo-grid-layout;
+  }
+
+  &__item {
+    @include photo-grid.photo-grid-item;
+  }
+
+  &__action {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    &:disabled {
+      cursor: default;
+    }
+
+    &:not(:disabled):hover .photo-list__add-to-favorites,
+    &:not(:disabled):focus-visible .photo-list__add-to-favorites {
+      opacity: 1;
+    }
+  }
+
+  &__add-to-favorites {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    padding: 1rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: white;
+    pointer-events: none;
+    background: rgb(0 0 0 / 55%);
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.75rem;
+  }
+
+  &__favorite-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--mat-sys-on-error);
+    background: var(--mat-sys-error);
+    border-radius: 50%;
+    place-items: center;
+    box-shadow: var(--mat-sys-level2);
+
+    mat-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      font-size: 1.25rem;
+    }
+  }
+
+  &__loader-label--visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  &__loader,
+  &__error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 7rem;
+  }
+
+  &__error {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  &__sentinel {
+    height: 1px;
+  }
+}

@@ -1,0 +1,45 @@
+<section class="photo-list">
+  <ul class="photo-list__grid" aria-label="Random photos">
+    @for (photo of store.photos(); track photo.id) {
+      @let isFavorite = favoritesStore.contains(photo.id);
+      <li class="photo-list__item">
+        <button
+          type="button"
+          class="photo-list__action"
+          [disabled]="isFavorite"
+          [attr.aria-label]="isFavorite ? 'Photo already added to favorites' : 'Add photo to favorites'"
+          (click)="addToFavorites(photo.id)"
+        >
+          <app-photo-tile [photo]="photo" [priority]="$first" />
+
+          @if (isFavorite) {
+            <span class="photo-list__favorite-badge" aria-hidden="true">
+              <mat-icon>favorite</mat-icon>
+            </span>
+          } @else {
+            <span class="photo-list__add-to-favorites" aria-hidden="true">
+              <mat-icon>favorite</mat-icon>
+              Add to favorites</span
+            >
+          }
+        </button>
+      </li>
+    }
+  </ul>
+
+  @if (store.error()) {
+    <div class="photo-list__error" role="alert">
+      <span>{{ store.error() }}</span>
+      <button mat-button type="button" (click)="requestMorePhotos()">Try again</button>
+    </div>
+  }
+
+  @if (store.loading()) {
+    <div class="photo-list__loader" role="status">
+      <mat-spinner aria-hidden="true" [diameter]="48" />
+      <span class="photo-list__loader-label photo-list__loader-label--visually-hidden"> Loading photos </span>
+    </div>
+  }
+
+  <div class="photo-list__sentinel" appInfiniteScrollTrigger aria-hidden="true" (reached)="requestMorePhotos()"></div>
+</section>

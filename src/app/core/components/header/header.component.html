@@ -1,0 +1,19 @@
+<mat-toolbar>
+  <nav class="header" aria-label="Primary navigation">
+    <a
+      [matButton]="activeSection() === 'photos' ? 'tonal' : 'text'"
+      routerLink="/"
+      [attr.aria-current]="activeSection() === 'photos' ? 'page' : null"
+    >
+      Photos
+    </a>
+
+    <a
+      [matButton]="activeSection() === 'favorites' ? 'tonal' : 'text'"
+      routerLink="/favorites"
+      [attr.aria-current]="activeSection() === 'favorites' ? 'page' : null"
+    >
+      Favorites
+    </a>
+  </nav>
+</mat-toolbar>
